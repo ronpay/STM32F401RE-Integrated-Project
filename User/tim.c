@@ -6,16 +6,16 @@ void TIM2_PWMOUTPUT_Config(void) {
     GPIO_InitTypeDef GPIO_InitStructure;
 
     /*开启相关的GPIO外设时钟*/
-    RCC_AHB1PeriphClockCmd(GENERAL_OCPWM_GPIO_CLK, ENABLE);
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
     /* 定时器通道引脚复用 */
-    GPIO_PinAFConfig(GENERAL_OCPWM_GPIO_PORT, GENERAL_OCPWM_PINSOURCE_1,
-                     GENERAL_OCPWM_AF);
-    GPIO_PinAFConfig(GENERAL_OCPWM_GPIO_PORT, GENERAL_OCPWM_PINSOURCE_2,
-                     GENERAL_OCPWM_AF);
-    GPIO_PinAFConfig(GENERAL_OCPWM_GPIO_PORT, GENERAL_OCPWM_PINSOURCE_3,
-                     GENERAL_OCPWM_AF);
-    GPIO_PinAFConfig(GENERAL_OCPWM_GPIO_PORT, GENERAL_OCPWM_PINSOURCE_4,
-                     GENERAL_OCPWM_AF);
+    GPIO_PinAFConfig(GPIOA, GPIO_PinSource0,
+                     GPIO_AF_TIM2);
+    GPIO_PinAFConfig(GPIOA, GPIO_PinSource1,
+                     GPIO_AF_TIM2);
+    GPIO_PinAFConfig(GPIOA, GPIO_PinSource2,
+                     GPIO_AF_TIM2);
+    GPIO_PinAFConfig(GPIOA, GPIO_PinSource3,
+                     GPIO_AF_TIM2);
 
     /* 定时器通道引脚配置 */
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
@@ -23,20 +23,20 @@ void TIM2_PWMOUTPUT_Config(void) {
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
 
-    GPIO_InitStructure.GPIO_Pin = GENERAL_OCPWM_PIN_1;
-    GPIO_Init(GENERAL_OCPWM_GPIO_PORT, &GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = GENERAL_OCPWM_PIN_2;
-    GPIO_Init(GENERAL_OCPWM_GPIO_PORT, &GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = GENERAL_OCPWM_PIN_3;
-    GPIO_Init(GENERAL_OCPWM_GPIO_PORT, &GPIO_InitStructure);
-    GPIO_InitStructure.GPIO_Pin = GENERAL_OCPWM_PIN_4;
-    GPIO_Init(GENERAL_OCPWM_GPIO_PORT, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
 
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     TIM_OCInitTypeDef TIM_OCInitStructure;
 
     // 开启TIMx_CLK,x[2,3,4,5,12,13,14]
-    RCC_APB1PeriphClockCmd(GENERAL_TIM_CLK, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
     /* 累计 TIM_Period个后产生一个更新或者中断*/
     //当定时器从0计数到8399，即为8400次，为一个定时周期
@@ -54,30 +54,30 @@ void TIM2_PWMOUTPUT_Config(void) {
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
 
     // 初始化定时器TIMx, x[2,3,4,5,12,13,14]
-    TIM_TimeBaseInit(GENERAL_TIM, &TIM_TimeBaseStructure);
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 
     /*PWM模式配置*/
     /* PWM1 Mode configuration: Channel1 */
-    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;  //配置为PWM模式1
+	//配置为PWM模式1
+    TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;  
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-    // TIM_OCInitStructure.TIM_Pulse = 2800-1;
     TIM_OCInitStructure.TIM_Pulse = 0;
-    TIM_OCInitStructure.TIM_OCPolarity =
-        TIM_OCPolarity_High;  //当定时器计数值小于CCR1_Val时为高电平
-
-    TIM_OC1Init(GENERAL_TIM, &TIM_OCInitStructure);  //使能通道1
-    TIM_OC2Init(GENERAL_TIM, &TIM_OCInitStructure);  //使能通道2
-    TIM_OC3Init(GENERAL_TIM, &TIM_OCInitStructure);  //使能通道3
-    TIM_OC4Init(GENERAL_TIM, &TIM_OCInitStructure);  //使能通道4
+	//当定时器计数值小于CCR1_Val时为高电平
+    TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;  
+	//使能通道1
+    TIM_OC1Init(TIM2, &TIM_OCInitStructure);  
+    TIM_OC2Init(TIM2, &TIM_OCInitStructure);  //使能通道2
+    TIM_OC3Init(TIM2, &TIM_OCInitStructure);  //使能通道3
+    TIM_OC4Init(TIM2, &TIM_OCInitStructure);  //使能通道4
 
     /*使能通道1234重载*/
-    TIM_OC1PreloadConfig(GENERAL_TIM, TIM_OCPreload_Enable);
-    TIM_OC2PreloadConfig(GENERAL_TIM, TIM_OCPreload_Enable);
-    TIM_OC3PreloadConfig(GENERAL_TIM, TIM_OCPreload_Enable);
-    TIM_OC4PreloadConfig(GENERAL_TIM, TIM_OCPreload_Enable);
+    TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Enable);
+    TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable);
+    TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable);
+    TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable);
 
     // 使能定时器
-    TIM_Cmd(GENERAL_TIM, ENABLE);
+    TIM_Cmd(TIM2, ENABLE);
 }
 
 void TIM3_Cap_Init(u16 arr, u16 psc) {
@@ -151,12 +151,12 @@ void TIM3_Cap_Init(u16 arr, u16 psc) {
                  ENABLE);  //允许更新中断，允许CC1IE捕获中断
     //中断分组初始化
     TIM_Cmd(TIM3, ENABLE);
-
-    NVIC_InitStructure.NVIC_IRQChannel =
-        TIM3_IRQn;  //捕获中断：TIM3_CC_IRQn;
-                    //TIM3的触发中断：TIM3_TRG_COM_TIM31_IRQn
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;  //抢占优先级
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;         //从优先级
+	//捕获中断：TIM3_CC_IRQn;
+	//TIM3的触发中断：TIM3_TRG_COM_TIM31_IRQn
+    NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;  
+    //优先级配置                
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;  
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 }

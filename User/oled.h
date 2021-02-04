@@ -5,10 +5,11 @@
 #include "i2c.h"
 #include "stm32f4xx.h"
 #include "sysTick.h"
+#include "newi2c.h"
 
 void OLED_Config(void);
 
-void I2C_WriteByte(uint8_t addr, uint8_t data);
+//void I2C_WriteByte(uint8_t addr, uint8_t data);
 void WriteCmd(unsigned char I2C_Command);
 void WriteDat(unsigned char I2C_Data);
 

@@ -3,16 +3,17 @@
 #include "stm32f4xx.h"
 #include "sysTick.h"
 #include "tim.h"
-volatile uint32_t CapVal[6] = {0};  //第一次下降沿计数值
-volatile uint8_t Flag[6] = {0};     //捕获状态
-float Duty[6] = {0};
-int cap = 0;  //正在进行捕获的通道识别
-int i = 0;
-int f = 0;
-int flag = 0;
-int cnt = 0;
+
+#define ReceiverDelayReady 0
+#define NumOfReciver 6
+
+volatile uint32_t CapVal[6] = {0};      //第一次下降沿计数值
+volatile uint8_t captureFlag[6] = {0};  //捕获状态
+double Duty[6] = {0};
+int Receiver_Delay[6] = {0};
 u8 hm_flag = '2';
-float Cycle = 0;
+const float Cycle = 20000;
+extern uint32_t Task_Delay[];
 
 void USART6_IRQHandler(void) {
     if (USART_GetITStatus(USART6, USART_IT_RXNE) != RESET) {
@@ -21,11 +22,13 @@ void USART6_IRQHandler(void) {
             printf("Ble is printing the data of mpu6050");
         } else if (hm_flag == '1') {
             printf("Ble is printing the data of reciver");
+        } else if (hm_flag == '2') {
+            ;
+        } else {
+            printf("Wrong input, please enter 0 or 1, without CR/LF");
         }
     }
 }
-
-extern uint32_t Task_Delay[];
 
 void SysTick_Handler(void) {
     TimingDelay_Decrement();
@@ -35,42 +38,48 @@ void SysTick_Handler(void) {
         if (Task_Delay[i]) {
             Task_Delay[i]--;
         }
+        for (i = 0; i < NumOfReciver; i++) {
+            if (Receiver_Delay[i]) {
+                Receiver_Delay[i]--;
+            }
+        }
     }
 }
 
 void TIM3_IRQHandler(void) {
+    int receiverNum;
     if (TIM_GetITStatus(TIM3, TIM_IT_CC1) != RESET) {
-        i = 0;
+        receiverNum = 0;
 
-        if (flag == 0) {
-            TIM_Cmd(TIM3, DISABLE);
-            TIM_SetCounter(TIM3, 0);
-            TIM_Cmd(TIM3, ENABLE);
-            Cycle = TIM_GetCapture3(TIM3) / 3;
-            flag++;
-        }
-
-        switch (Flag[i]) {
+        switch (captureFlag[receiverNum]) {
             case 0:
                 TIM_Cmd(TIM3, DISABLE);
                 TIM_SetCounter(TIM3, 0);
                 TIM_OC1PolarityConfig(TIM3, TIM_ICPolarity_Falling);
                 TIM_Cmd(TIM3, ENABLE);
-                Flag[i]++;
+                captureFlag[receiverNum]=1;
                 break;
             case 1:
-                CapVal[i] = TIM_GetCapture1(TIM3);
-                Duty[i] = CapVal[i] / Cycle;
-                Motor_Set(Duty[i], i + 1);
-                TIM_OC1PolarityConfig(TIM3, TIM_ICPolarity_Rising);
-                Flag[i] = 0;
+                CapVal[receiverNum] = TIM_GetCapture1(TIM3);
+                Duty[receiverNum] = (float)((int)CapVal[receiverNum] % (int)Cycle);
 
-                if (hm_flag == '1') {
-                    printf("Cycle:%f", Cycle);
-                    printf("High:%f", (float)CapVal[i]);
-                    printf("CH%i:%.2f percent\n", i + 1,
-                           100 * Duty[i]);  // 5-10%
-                    Delay_ms(200);
+                Motor_Set(Duty[receiverNum], receiverNum + 1);
+                TIM_OC1PolarityConfig(TIM3, TIM_ICPolarity_Rising);
+                captureFlag[receiverNum] = 0;
+
+                if (hm_flag == '1' &&
+                    Receiver_Delay[receiverNum] == ReceiverDelayReady) {
+                    //						printf("Cycle:%f\n",Cycle);
+                    //						printf("High:%f\n",(float)CapVal[i]);
+                    printf("CH%i:%.2f percent\n", receiverNum + 1,
+                           100 * Duty[receiverNum]);  // 5-10%
+
+                    //						printf("Cycle:%f\n",Cycle);
+                    //						printf("High:%f\n",(float)CapVal[i]);
+                    printf("CH3:%.2f percent\n",
+                           100 * (0.15f - Duty[receiverNum]));  // 5-10%
+                    //						Delay_ms(200);
+                    Receiver_Delay[receiverNum] = 500;
                 }
                 break;
         }
@@ -78,116 +87,68 @@ void TIM3_IRQHandler(void) {
     }
 
     else if (TIM_GetITStatus(TIM3, TIM_IT_CC2) != RESET) {
-        i = 1;
+        receiverNum = 1;
 
-        if (flag == 0) {
-            TIM_Cmd(TIM3, DISABLE);
-            TIM_SetCounter(TIM3, 0);
-            TIM_Cmd(TIM3, ENABLE);
-            Cycle = TIM_GetCapture3(TIM3) / 3;
-            flag++;
-        }
-
-        switch (Flag[i]) {
+        switch (captureFlag[receiverNum]) {
             case 0:
                 TIM_Cmd(TIM3, DISABLE);
                 TIM_SetCounter(TIM3, 0);
                 TIM_OC2PolarityConfig(TIM3, TIM_ICPolarity_Falling);
                 TIM_Cmd(TIM3, ENABLE);
-                Flag[i]++;
+                captureFlag[receiverNum]=1;
                 break;
             case 1:
-                CapVal[i] = TIM_GetCapture2(TIM3);
-                Duty[i] = CapVal[i] / Cycle;
-                Motor_Set(Duty[i], i + 1);
+                CapVal[receiverNum] = TIM_GetCapture2(TIM3);
+                Duty[receiverNum] = (float)((int)CapVal[receiverNum] % (int)Cycle);
+                Motor_Set(Duty[receiverNum], receiverNum + 1);
                 TIM_OC2PolarityConfig(TIM3, TIM_ICPolarity_Rising);
-                Flag[i] = 0;
+                captureFlag[receiverNum] = 0;
 
-                if (hm_flag == '1') {
-                    printf("Cycle:%f", Cycle);
-                    printf("High:%f", (float)CapVal[i]);
-                    printf("CH%i:%.2f percent\n", i + 1,
-                           100 * Duty[i]);  // 5-10%
-                    Delay_ms(200);
-                }
                 break;
         }
         TIM_ClearITPendingBit(TIM3, TIM_IT_CC2 | TIM_IT_Update);
     }
 
     else if (TIM_GetITStatus(TIM3, TIM_IT_CC3) != RESET) {
-        i = 2;
+        receiverNum = 2;
 
-        if (flag == 0) {
-            TIM_Cmd(TIM3, DISABLE);
-            TIM_SetCounter(TIM3, 0);
-            TIM_Cmd(TIM3, ENABLE);
-            Cycle = TIM_GetCapture3(TIM3);
-            flag++;
-        }
-
-        switch (Flag[i]) {
+        switch (captureFlag[receiverNum]) {
             case 0:
                 TIM_Cmd(TIM3, DISABLE);
                 TIM_SetCounter(TIM3, 0);
                 TIM_OC3PolarityConfig(TIM3, TIM_ICPolarity_Falling);
                 TIM_Cmd(TIM3, ENABLE);
-                Flag[i]++;
+                captureFlag[receiverNum]=1;
                 break;
             case 1:
-                CapVal[i] = TIM_GetCapture3(TIM3);
-                Duty[i] = (CapVal[i] / Cycle);
-                Motor_Set(Duty[i], i + 1);
+                CapVal[receiverNum] = TIM_GetCapture3(TIM3);
+                Duty[receiverNum] = (float)((int)CapVal[receiverNum] % (int)Cycle);
+                Motor_Set(Duty[receiverNum], receiverNum + 1);
                 TIM_OC3PolarityConfig(TIM3, TIM_ICPolarity_Rising);
-                Flag[i] = 0;
-                flag = 0;
-                cnt++;
-                if (hm_flag == '1' && cnt >= 50) {
-                    printf("Cycle:%f", Cycle);
-                    printf("High:%f", (float)CapVal[i]);
-                    printf("CH%i:%.2f percent\n", i + 1,
-                           100 * Duty[i]);  // 5-10%
-                    cnt = 0;
-                }
+                captureFlag[receiverNum] = 0;
+
                 break;
         }
         TIM_ClearITPendingBit(TIM3, TIM_IT_CC3 | TIM_IT_Update);
     }
 
     else if (TIM_GetITStatus(TIM3, TIM_IT_CC4) != RESET) {
-        i = 3;
+        receiverNum = 3;
 
-        if (flag == 0) {
-            TIM_Cmd(TIM3, DISABLE);
-            TIM_SetCounter(TIM3, 0);
-            TIM_Cmd(TIM3, ENABLE);
-            Cycle = TIM_GetCapture3(TIM3) / 3;
-            flag++;
-        }
-
-        switch (Flag[i]) {
+        switch (captureFlag[receiverNum]) {
             case 0:
                 TIM_Cmd(TIM3, DISABLE);
                 TIM_SetCounter(TIM3, 0);
                 TIM_OC4PolarityConfig(TIM3, TIM_ICPolarity_Falling);
                 TIM_Cmd(TIM3, ENABLE);
-                Flag[i]++;
+                captureFlag[receiverNum]=1;
                 break;
             case 1:
-                CapVal[i] = TIM_GetCapture4(TIM3);
-                Duty[i] = CapVal[i] / Cycle;
-                Motor_Set(Duty[i], i + 1);
+                CapVal[receiverNum] = TIM_GetCapture4(TIM3);
+                Duty[receiverNum] = (float)((int)CapVal[receiverNum] % (int)Cycle);
+                Motor_Set(Duty[receiverNum], receiverNum + 1);
                 TIM_OC4PolarityConfig(TIM3, TIM_ICPolarity_Rising);
-                Flag[i] = 0;
-
-                if (hm_flag == '1') {
-                    printf("Cycle:%f", Cycle);
-                    printf("High:%f", (float)CapVal[i]);
-                    printf("CH%i:%.2f percent\n", i + 1,
-                           100 * Duty[i]);  // 5-10%
-                    Delay_ms(200);
-                }
-                break;
+                captureFlag[receiverNum] = 0;
         }
         TIM_ClearITPendingBit(TIM3, TIM_IT_CC4 | TIM_IT_Update);
     }

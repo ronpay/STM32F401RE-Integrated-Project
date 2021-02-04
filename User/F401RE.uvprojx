@@ -678,6 +678,11 @@
               <FileType>1</FileType>
               <FilePath>.\clkConfig.c</FilePath>
             </File>
+            <File>
+              <FileName>newi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\newi2c.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

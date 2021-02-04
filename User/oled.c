@@ -42,29 +42,29 @@ void OLED_Config(void) { I2C3_Configuration(); }
  *					data：要写入的数据
  * @retval 无
  */
-void I2C_WriteByte(uint8_t addr, uint8_t data) {
-    while (I2C_GetFlagStatus(I2C3, I2C_FLAG_BUSY))
-        ;
+//void I2C_WriteByte(uint8_t addr, uint8_t data) {
+//    while (I2C_GetFlagStatus(I2C3, I2C_FLAG_BUSY))
+//        ;
 
-    I2C_GenerateSTART(I2C3, ENABLE);  //开启I2C3
-    while (!I2C_CheckEvent(I2C3, I2C_EVENT_MASTER_MODE_SELECT))
-        ; /*EV5,主模式*/
+//    I2C_GenerateSTART(I2C3, ENABLE);  //开启I2C3
+//    while (!I2C_CheckEvent(I2C3, I2C_EVENT_MASTER_MODE_SELECT))
+//        ; /*EV5,主模式*/
 
-    I2C_Send7bitAddress(I2C3, OLED_ADDRESS,
-                        I2C_Direction_Transmitter);  //器件地址 -- 默认0x78
-    while (!I2C_CheckEvent(I2C3, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
-        ;
+//    I2C_Send7bitAddress(I2C3, OLED_ADDRESS,
+//                        I2C_Direction_Transmitter);  //器件地址 -- 默认0x78
+//    while (!I2C_CheckEvent(I2C3, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
+//        ;
 
-    I2C_SendData(I2C3, addr);  //寄存器地址
-    while (!I2C_CheckEvent(I2C3, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
-        ;
+//    I2C_SendData(I2C3, addr);  //寄存器地址
+//    while (!I2C_CheckEvent(I2C3, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
+//        ;
 
-    I2C_SendData(I2C3, data);  //发送数据
-    while (!I2C_CheckEvent(I2C3, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
-        ;
+//    I2C_SendData(I2C3, data);  //发送数据
+//    while (!I2C_CheckEvent(I2C3, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
+//        ;
 
-    I2C_GenerateSTOP(I2C3, ENABLE);  //关闭I2C3总线
-}
+//    I2C_GenerateSTOP(I2C3, ENABLE);  //关闭I2C3总线
+//}
 
 /**
  * @brief  WriteCmd，向OLED写入命令
@@ -73,7 +73,7 @@ void I2C_WriteByte(uint8_t addr, uint8_t data) {
  */
 void WriteCmd(unsigned char I2C_Command)  //写命令
 {
-    I2C_WriteByte(0x00, I2C_Command);
+    I2C_WriteByte(I2C3,OLED_ADDRESS,0x00, I2C_Command);
 }
 
 /**
@@ -83,7 +83,7 @@ void WriteCmd(unsigned char I2C_Command)  //写命令
  */
 void WriteDat(unsigned char I2C_Data)  //写数据
 {
-    I2C_WriteByte(0x40, I2C_Data);
+    I2C_WriteByte(I2C3,OLED_ADDRESS,0x40, I2C_Data);
 }
 
 /**

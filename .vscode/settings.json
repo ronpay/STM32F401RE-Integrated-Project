@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "*.hpp": "cpp",
+        "*.h": "c",
+        "main.c": "cpp",
+        "stm32f4xx_it.c": "cpp",
+        "task_control.c": "cpp",
+        "task_log.c": "cpp",
+        "task_message.c": "cpp"
+    },
+    //"editor.minimap.maxColumn": 60,
+    "files.encoding": "gb2312",
+    "editor.quickSuggestions": true,
+    "C_Cpp.intelliSenseEngine": "Default",
+    "[cpp]": {
+        "editor.quickSuggestions": true
+    },
+    "[c]": {
+        "editor.quickSuggestions": true
+    }
+}

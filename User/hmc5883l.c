@@ -1,16 +1,18 @@
 #include "hmc5883l.h"
-
-#include "i2c.h"
+//#include "i2c.h"
 #include "mpu6050.h"
 #include "stdio.h"
 #include "sysTick.h"
+#include "newi2c.h"
 
 void HMC5883L_WriteReg(u8 reg_add, u8 reg_dat) {
-    I2C_SAND_BYTE(HMC_WRITE, reg_add, reg_dat);
+	I2C_WriteByte(I2C1,HMC_WRITE,reg_add,reg_dat);
+ //   I2C_SAND_BYTE(HMC_WRITE, reg_add, reg_dat);
 }
 
 void HMC5883L_ReadData(u8 reg_add, unsigned char* Read, u8 num) {
-    I2C_READ_BUFFER(HMC_READ, reg_add, Read, 6);
+	I2C_ReadData(I2C1,HMC_READ,reg_add,Read,6);
+//   I2C_READ_BUFFER(HMC_READ, reg_add, Read, 6);
 }
 
 // GY-86≥ı ºªØ≈‰÷√

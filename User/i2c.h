@@ -92,8 +92,8 @@ int Sensors_I2C_WriteNoRegister(unsigned char slave_addr,
 int Sensors_I2C_ReadNoRegister(unsigned char slave_addr, unsigned short len,
                                unsigned char *data_ptr);
 
-//为HMC5883L而设置的
-void I2C_SAND_BYTE(u8 SlaveAddr, u8 writeAddr, u8 pBuffer);
-void I2C_READ_BUFFER(u8 SlaveAddr, u8 readAddr, u8 *pBuffer, u16 NumByteToRead);
+////为HMC5883L而设置的
+//void I2C_SAND_BYTE(u8 SlaveAddr, u8 writeAddr, u8 pBuffer);
+//void I2C_READ_BUFFER(u8 SlaveAddr, u8 readAddr, u8 *pBuffer, u16 NumByteToRead);
 
 #endif  // __I2C_H__

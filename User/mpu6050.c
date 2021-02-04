@@ -1,6 +1,7 @@
 #include "mpu6050.h"
 
 #include "i2c.h"
+#include "newi2c.h"
 
 #define MPU_ERROR I2C_ERROR
 #define MPU_INFO I2C_INFO
@@ -14,7 +15,8 @@ void MPU6050_Config(void) { I2C1_Init(); }
  * @retval
  */
 void MPU6050_WriteReg(u8 reg_add, u8 reg_data) {
-    Sensors_I2C_WriteRegister(MPU6050_ADDRESS, reg_add, 1, &reg_data);
+	I2C_WriteByte(I2C1,MPU6050_ADDRESS<<1,reg_add,reg_data);
+ //   Sensors_I2C_WriteRegister(MPU6050_ADDRESS, reg_add, 1, &reg_data);
 }
 
 /**
@@ -25,7 +27,8 @@ void MPU6050_WriteReg(u8 reg_add, u8 reg_data) {
  * @retval
  */
 void MPU6050_ReadData(u8 reg_add, unsigned char *Read, u8 num) {
-    Sensors_I2C_ReadRegister(MPU6050_ADDRESS, reg_add, num, Read);
+	I2C_ReadData(I2C1,MPU6050_ADDRESS<<1,reg_add,Read,num);
+//    Sensors_I2C_ReadRegister(MPU6050_ADDRESS, reg_add, num, Read);
 }
 
 /**
