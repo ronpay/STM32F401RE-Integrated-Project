@@ -5,8 +5,8 @@
 
 // extern u32 temp ;
 // extern float set ;
-// extern u8 TIM3CH1_CAPTURE_STA ; //ÊäÈë²¶»ñÖĞ¶Ï
-// extern u16 TIM3CH1_CAPTURE_VAL; //ÊäÈë²¶»ñÖµ
+// extern u8 TIM3CH1_CAPTURE_STA ; //è¾“å…¥æ•è·ä¸­æ–­
+// extern u16 TIM3CH1_CAPTURE_VAL; //è¾“å…¥æ•è·å€¼
 
 #define GENERAL_OCPWM_PIN_1 GPIO_Pin_0
 #define GENERAL_OCPWM_PIN_2 GPIO_Pin_1

@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #include "stm32f4xx.h"
-/*¼òµ¥ÈÎÎñ¹ÜÀí*/
+/*ç®€å•ä»»åŠ¡ç®¡ç†*/
 #define TASK_ENABLE 0
 #define NumOfTask 3
 

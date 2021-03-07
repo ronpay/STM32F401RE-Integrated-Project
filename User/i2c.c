@@ -31,13 +31,13 @@ static unsigned long ST_Sensors_I2C_ReadNoRegister(
 /*******************************  Function ************************************/
 
 	/**
- * @brief  ³¬Ê±»Øµ÷º¯Êı£¬¼ì²âI2C±êÖ¾³¬Ê±µ÷ÓÃ±¾º¯Êı£¬³õÊ¼»¯I2CÖØĞÂ¼ì²â¡£
- * @param  ´íÎó´úÂë£¬Ã¿¸öµ÷ÓÃÓĞ¶ÀÁ¢µÄ±àºÅ£¬±ãÓÚ²éÕÒ´íÎó
- * @retval Ä¬ÈÏ·µ»Ø1£¬±íÊ¾I2C¼ì²â³ö´í
+ * @brief  è¶…æ—¶å›è°ƒå‡½æ•°ï¼Œæ£€æµ‹I2Cæ ‡å¿—è¶…æ—¶è°ƒç”¨æœ¬å‡½æ•°ï¼Œåˆå§‹åŒ–I2Cé‡æ–°æ£€æµ‹ã€‚
+ * @param  é”™è¯¯ä»£ç ï¼Œæ¯ä¸ªè°ƒç”¨æœ‰ç‹¬ç«‹çš„ç¼–å·ï¼Œä¾¿äºæŸ¥æ‰¾é”™è¯¯
+ * @retval é»˜è®¤è¿”å›1ï¼Œè¡¨ç¤ºI2Cæ£€æµ‹å‡ºé”™
  */
 static uint32_t I2Cx_TIMEOUT_UserCallback(char value) {
     /* The following code allows I2C error recovery and return to normal
-       communication if the error source doesn’t still exist (ie. hardware
+       communication if the error source doesnæŠ° still exist (ie. hardware
        issue..) */
     I2C_InitTypeDef I2C_InitStructure;
 
@@ -65,12 +65,12 @@ static uint32_t I2Cx_TIMEOUT_UserCallback(char value) {
 }
 
 /**
- * @brief  Ğ´¼Ä´æÆ÷(¶à´Î³¢ÊÔ)£¬ÕâÊÇÌá¹©¸øÉÏ²ãµÄ½Ó¿Ú
- * @param  slave_addr: ´Ó»úµØÖ·
- * @param 	reg_addr:¼Ä´æÆ÷µØÖ·
- * @param len£ºĞ´ÈëµÄ³¤¶È
- *	@param data_ptr:Ö¸ÏòÒªĞ´ÈëµÄÊı¾İ
- * @retval Õı³£Îª0£¬²»Õı³£Îª·Ç0
+ * @brief  å†™å¯„å­˜å™¨(å¤šæ¬¡å°è¯•)ï¼Œè¿™æ˜¯æä¾›ç»™ä¸Šå±‚çš„æ¥å£
+ * @param  slave_addr: ä»æœºåœ°å€
+ * @param 	reg_addr:å¯„å­˜å™¨åœ°å€
+ * @param lenï¼šå†™å…¥çš„é•¿åº¦
+ *	@param data_ptr:æŒ‡å‘è¦å†™å…¥çš„æ•°æ®
+ * @retval æ­£å¸¸ä¸º0ï¼Œä¸æ­£å¸¸ä¸ºé0
  */
 int Sensors_I2C_WriteRegister(unsigned char slave_addr, unsigned char reg_addr,
                               unsigned short len,
@@ -92,12 +92,12 @@ tryWriteAgain:
 }
 
 /**
- * @brief  ¶Á¼Ä´æÆ÷(¶à´Î³¢ÊÔ)£¬ÕâÊÇÌá¹©¸øÉÏ²ãµÄ½Ó¿Ú
- * @param  slave_addr: ´Ó»úµØÖ·
- * @param 	reg_addr:¼Ä´æÆ÷µØÖ·
- * @param len£ºÒª¶ÁÈ¡µÄ³¤¶È
- *	@param data_ptr:Ö¸ÏòÒª´æ´¢Êı¾İµÄÖ¸Õë
- * @retval Õı³£Îª0£¬²»Õı³£Îª·Ç0
+ * @brief  è¯»å¯„å­˜å™¨(å¤šæ¬¡å°è¯•)ï¼Œè¿™æ˜¯æä¾›ç»™ä¸Šå±‚çš„æ¥å£
+ * @param  slave_addr: ä»æœºåœ°å€
+ * @param 	reg_addr:å¯„å­˜å™¨åœ°å€
+ * @param lenï¼šè¦è¯»å–çš„é•¿åº¦
+ *	@param data_ptr:æŒ‡å‘è¦å­˜å‚¨æ•°æ®çš„æŒ‡é’ˆ
+ * @retval æ­£å¸¸ä¸º0ï¼Œä¸æ­£å¸¸ä¸ºé0
  */
 int Sensors_I2C_ReadRegister(unsigned char slave_addr, unsigned char reg_addr,
                              unsigned short len, unsigned char *data_ptr) {
@@ -119,12 +119,12 @@ tryReadAgain:
 }
 
 /**
- * @brief  Ğ´¼Ä´æÆ÷(µ¥´Î³¢ÊÔ)£¬ÕâÊÇµ×²ãI2C½Ó¿Ú
- * @param  slave_addr: ´Ó»úµØÖ·
- * @param 	reg_addr:¼Ä´æÆ÷µØÖ·
- * @param len£ºĞ´ÈëµÄ³¤¶È
- *	@param data_ptr:Ö¸ÏòÒªĞ´ÈëµÄÊı¾İ
- * @retval Õı³£Îª0£¬²»Õı³£Îª·Ç0
+ * @brief  å†™å¯„å­˜å™¨(å•æ¬¡å°è¯•)ï¼Œè¿™æ˜¯åº•å±‚I2Cæ¥å£
+ * @param  slave_addr: ä»æœºåœ°å€
+ * @param 	reg_addr:å¯„å­˜å™¨åœ°å€
+ * @param lenï¼šå†™å…¥çš„é•¿åº¦
+ *	@param data_ptr:æŒ‡å‘è¦å†™å…¥çš„æ•°æ®
+ * @retval æ­£å¸¸ä¸º0ï¼Œä¸æ­£å¸¸ä¸ºé0
  */
 static unsigned long ST_Sensors_I2C_WriteRegister(
     unsigned char Address, unsigned char RegisterAddr,
@@ -178,12 +178,12 @@ static unsigned long ST_Sensors_I2C_WriteRegister(
 }
 
 /**
- * @brief  ¶Á¼Ä´æÆ÷(µ¥´Î³¢ÊÔ)£¬ÕâÊÇµ×²ãI2C½Ó¿Ú
- * @param  slave_addr: ´Ó»úµØÖ·
- * @param 	reg_addr:¼Ä´æÆ÷µØÖ·
- * @param len£ºÒª¶ÁÈ¡µÄ³¤¶È
- *	@param data_ptr:Ö¸ÏòÒª´æ´¢Êı¾İµÄÖ¸Õë
- * @retval Õı³£Îª0£¬²»Õı³£Îª·Ç0
+ * @brief  è¯»å¯„å­˜å™¨(å•æ¬¡å°è¯•)ï¼Œè¿™æ˜¯åº•å±‚I2Cæ¥å£
+ * @param  slave_addr: ä»æœºåœ°å€
+ * @param 	reg_addr:å¯„å­˜å™¨åœ°å€
+ * @param lenï¼šè¦è¯»å–çš„é•¿åº¦
+ *	@param data_ptr:æŒ‡å‘è¦å­˜å‚¨æ•°æ®çš„æŒ‡é’ˆ
+ * @retval æ­£å¸¸ä¸º0ï¼Œä¸æ­£å¸¸ä¸ºé0
  */
 static unsigned long ST_Sensors_I2C_ReadRegister(unsigned char Address,
                                                  unsigned char RegisterAddr,
@@ -333,10 +333,10 @@ endReadLoop:
 
 /**
  * @brief
- * Ğ´ÃüÁî(¶à´Î³¢ÊÔ)£¬ÕâÊÇµ×²ãI2C½Ó¿Ú£¬×¨ÓÃÓÚÖ»ÏòIICÉè±¸·¢ËÍÃüÁîµÄº¯Êı£¬ÃüÁî²»º¬Êı¾İ
- * @param  slave_addr: ´Ó»úµØÖ·
- * @param 	reg_addr:¼Ä´æÆ÷µØÖ·£¨ÒªĞ´ÈëµÄÃüÁî£©
- * @retval Õı³£Îª0£¬²»Õı³£Îª·Ç0
+ * å†™å‘½ä»¤(å¤šæ¬¡å°è¯•)ï¼Œè¿™æ˜¯åº•å±‚I2Cæ¥å£ï¼Œä¸“ç”¨äºåªå‘IICè®¾å¤‡å‘é€å‘½ä»¤çš„å‡½æ•°ï¼Œå‘½ä»¤ä¸å«æ•°æ®
+ * @param  slave_addr: ä»æœºåœ°å€
+ * @param 	reg_addr:å¯„å­˜å™¨åœ°å€ï¼ˆè¦å†™å…¥çš„å‘½ä»¤ï¼‰
+ * @retval æ­£å¸¸ä¸º0ï¼Œä¸æ­£å¸¸ä¸ºé0
  */
 int Sensors_I2C_WriteNoRegister(unsigned char slave_addr,
                                 unsigned char reg_addr) {
@@ -359,11 +359,11 @@ tryWriteAgain:
 
 /**
  * @brief
- *¶ÁÊı¾İ(¶à´Î³¢ÊÔ)£¬ÕâÊÇµ×²ãI2C½Ó¿Ú£¬×¨ÓÃÓÚÖ»ÏòIICÉè±¸¶ÁÈ¡Êı¾İ(²»ĞèÒª´«ËÍ¼Ä´æÆ÷µØÖ·)
- * @param  slave_addr: ´Ó»úµØÖ·
- * @param 	RegisterLen:Êı¾İ³¤¶È
- *	@param	RegisterValue£ºÖ¸Ïò´æ´¢Êı¾İµÄÖ¸Õë
- * @retval Õı³£Îª0£¬²»Õı³£Îª·Ç0
+ *è¯»æ•°æ®(å¤šæ¬¡å°è¯•)ï¼Œè¿™æ˜¯åº•å±‚I2Cæ¥å£ï¼Œä¸“ç”¨äºåªå‘IICè®¾å¤‡è¯»å–æ•°æ®(ä¸éœ€è¦ä¼ é€å¯„å­˜å™¨åœ°å€)
+ * @param  slave_addr: ä»æœºåœ°å€
+ * @param 	RegisterLen:æ•°æ®é•¿åº¦
+ *	@param	RegisterValueï¼šæŒ‡å‘å­˜å‚¨æ•°æ®çš„æŒ‡é’ˆ
+ * @retval æ­£å¸¸ä¸º0ï¼Œä¸æ­£å¸¸ä¸ºé0
  */
 int Sensors_I2C_ReadNoRegister(unsigned char slave_addr, unsigned short len,
                                unsigned char *data_ptr) {
@@ -386,10 +386,10 @@ tryReadAgain:
 
 /**
  * @brief
- * Ğ´ÃüÁî(µ¥´Î³¢ÊÔ)£¬ÕâÊÇµ×²ãI2C½Ó¿Ú£¬×¨ÓÃÓÚÖ»ÏòIICÉè±¸·¢ËÍÃüÁîµÄº¯Êı£¬ÃüÁî²»º¬Êı¾İ
- * @param  slave_addr: ´Ó»úµØÖ·
- * @param 	reg_addr:¼Ä´æÆ÷µØÖ·£¨ÒªĞ´ÈëµÄÃüÁî£©
- * @retval Õı³£Îª0£¬²»Õı³£Îª·Ç0
+ * å†™å‘½ä»¤(å•æ¬¡å°è¯•)ï¼Œè¿™æ˜¯åº•å±‚I2Cæ¥å£ï¼Œä¸“ç”¨äºåªå‘IICè®¾å¤‡å‘é€å‘½ä»¤çš„å‡½æ•°ï¼Œå‘½ä»¤ä¸å«æ•°æ®
+ * @param  slave_addr: ä»æœºåœ°å€
+ * @param 	reg_addr:å¯„å­˜å™¨åœ°å€ï¼ˆè¦å†™å…¥çš„å‘½ä»¤ï¼‰
+ * @retval æ­£å¸¸ä¸º0ï¼Œä¸æ­£å¸¸ä¸ºé0
  */
 static unsigned long ST_Sensors_I2C_WriteNoRegister(
     unsigned char Address, unsigned char RegisterAddr) {
@@ -432,11 +432,11 @@ static unsigned long ST_Sensors_I2C_WriteNoRegister(
 
 /**
  * @brief
- *¶ÁÊı¾İ(µ¥´Î³¢ÊÔ)£¬ÕâÊÇµ×²ãI2C½Ó¿Ú£¬×¨ÓÃÓÚÖ»ÏòIICÉè±¸¶ÁÈ¡Êı¾İ(²»ĞèÒª´«ËÍ¼Ä´æÆ÷µØÖ·)
- * @param  slave_addr: ´Ó»úµØÖ·
- * @param 	RegisterLen:Êı¾İ³¤¶È
- *	@param	RegisterValue£ºÖ¸Ïò´æ´¢Êı¾İµÄÖ¸Õë
- * @retval Õı³£Îª0£¬²»Õı³£Îª·Ç0
+ *è¯»æ•°æ®(å•æ¬¡å°è¯•)ï¼Œè¿™æ˜¯åº•å±‚I2Cæ¥å£ï¼Œä¸“ç”¨äºåªå‘IICè®¾å¤‡è¯»å–æ•°æ®(ä¸éœ€è¦ä¼ é€å¯„å­˜å™¨åœ°å€)
+ * @param  slave_addr: ä»æœºåœ°å€
+ * @param 	RegisterLen:æ•°æ®é•¿åº¦
+ *	@param	RegisterValueï¼šæŒ‡å‘å­˜å‚¨æ•°æ®çš„æŒ‡é’ˆ
+ * @retval æ­£å¸¸ä¸º0ï¼Œä¸æ­£å¸¸ä¸ºé0
  */
 static unsigned long ST_Sensors_I2C_ReadNoRegister(
     unsigned char Address, unsigned short RegisterLen,
@@ -562,71 +562,71 @@ endReadLoop:
 static unsigned short RETRY_IN_MLSEC = 55;
 
 /**
- * @brief  ÉèÖÃÖØÊÔµÈ´ıºÁÃëÊı
- * @param  ÎŞ
- * @retval ÎŞ
+ * @brief  è®¾ç½®é‡è¯•ç­‰å¾…æ¯«ç§’æ•°
+ * @param  æ— 
+ * @retval æ— 
  */
 void Set_I2C_Retry(unsigned short ml_sec) { RETRY_IN_MLSEC = ml_sec; }
 
 /**
- * @brief  »ñÈ¡ÖØÊÔµÈ´ıºÁÃëÊı
- * @param  ÎŞ
- * @retval ÎŞ
+ * @brief  è·å–é‡è¯•ç­‰å¾…æ¯«ç§’æ•°
+ * @param  æ— 
+ * @retval æ— 
  */
 unsigned short Get_I2C_Retry(void) { return RETRY_IN_MLSEC; }
 
-////ÎªHMC5883L¶øÉèÖÃµÄ£º
+////ä¸ºHMC5883Lè€Œè®¾ç½®çš„ï¼š
 //void I2C_SAND_BYTE(u8 SlaveAddr, u8 writeAddr,
-//                   u8 pBuffer) {  // I2C·¢ËÍÒ»¸ö×Ö½Ú£¨´ÓµØÖ·£¬ÄÚ²¿µØÖ·£¬ÄÚÈİ£©
-//    I2C_GenerateSTART(I2C1, ENABLE);  //·¢ËÍ¿ªÊ¼ĞÅºÅ
+//                   u8 pBuffer) {  // I2Cå‘é€ä¸€ä¸ªå­—èŠ‚ï¼ˆä»åœ°å€ï¼Œå†…éƒ¨åœ°å€ï¼Œå†…å®¹ï¼‰
+//    I2C_GenerateSTART(I2C1, ENABLE);  //å‘é€å¼€å§‹ä¿¡å·
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT))
-//        ;  //µÈ´ıÍê³É
+//        ;  //ç­‰å¾…å®Œæˆ
 //    I2C_Send7bitAddress(
 //        I2C1, SlaveAddr,
-//        I2C_Direction_Transmitter);  //·¢ËÍ´ÓÆ÷¼şµØÖ·¼°×´Ì¬£¨Ğ´Èë£©
+//        I2C_Direction_Transmitter);  //å‘é€ä»å™¨ä»¶åœ°å€åŠçŠ¶æ€ï¼ˆå†™å…¥ï¼‰
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
-//        ;                           //µÈ´ıÍê³É
-//    I2C_SendData(I2C1, writeAddr);  //·¢ËÍ´ÓÆ÷¼şÄÚ²¿¼Ä´æÆ÷µØÖ·
+//        ;                           //ç­‰å¾…å®Œæˆ
+//    I2C_SendData(I2C1, writeAddr);  //å‘é€ä»å™¨ä»¶å†…éƒ¨å¯„å­˜å™¨åœ°å€
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
-//        ;                         //µÈ´ıÍê³É
-//    I2C_SendData(I2C1, pBuffer);  //·¢ËÍÒªĞ´ÈëµÄÄÚÈİ
+//        ;                         //ç­‰å¾…å®Œæˆ
+//    I2C_SendData(I2C1, pBuffer);  //å‘é€è¦å†™å…¥çš„å†…å®¹
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
-//        ;                            //µÈ´ıÍê³É
-//    I2C_GenerateSTOP(I2C1, ENABLE);  //·¢ËÍ½áÊøĞÅºÅ
+//        ;                            //ç­‰å¾…å®Œæˆ
+//    I2C_GenerateSTOP(I2C1, ENABLE);  //å‘é€ç»“æŸä¿¡å·
 //}
 
 //void I2C_READ_BUFFER(
 //    u8 SlaveAddr, u8 readAddr, u8 *pBuffer,
-//    u16 NumByteToRead) {  // I2C¶ÁÈ¡Êı¾İ´®£¨Æ÷¼şµØÖ·£¬¼Ä´æÆ÷£¬ÄÚ²¿µØÖ·£¬ÊıÁ¿£©
+//    u16 NumByteToRead) {  // I2Cè¯»å–æ•°æ®ä¸²ï¼ˆå™¨ä»¶åœ°å€ï¼Œå¯„å­˜å™¨ï¼Œå†…éƒ¨åœ°å€ï¼Œæ•°é‡ï¼‰
 //    while (I2C_GetFlagStatus(I2C1, I2C_FLAG_BUSY))
 //        ;
-//    I2C_GenerateSTART(I2C1, ENABLE);  //¿ªÆôĞÅºÅ
+//    I2C_GenerateSTART(I2C1, ENABLE);  //å¼€å¯ä¿¡å·
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT))
-//        ;  //Çå³ı EV5
+//        ;  //æ¸…é™¤ EV5
 //    I2C_Send7bitAddress(I2C1, SlaveAddr,
-//                        I2C_Direction_Transmitter);  //Ğ´ÈëÆ÷¼şµØÖ·
+//                        I2C_Direction_Transmitter);  //å†™å…¥å™¨ä»¶åœ°å€
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))
-//        ;  //Çå³ı EV6
+//        ;  //æ¸…é™¤ EV6
 //    I2C_Cmd(I2C1, ENABLE);
-//    I2C_SendData(I2C1, readAddr);  //·¢ËÍ¶ÁµÄµØÖ·
+//    I2C_SendData(I2C1, readAddr);  //å‘é€è¯»çš„åœ°å€
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED))
-//        ;                             //Çå³ı EV8
-//    I2C_GenerateSTART(I2C1, ENABLE);  //¿ªÆôĞÅºÅ
+//        ;                             //æ¸…é™¤ EV8
+//    I2C_GenerateSTART(I2C1, ENABLE);  //å¼€å¯ä¿¡å·
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT))
-//        ;  //Çå³ı EV5
+//        ;  //æ¸…é™¤ EV5
 //    I2C_Send7bitAddress(I2C1, SlaveAddr,
-//                        I2C_Direction_Receiver);  //½«Æ÷¼şµØÖ·´«³ö£¬Ö÷»úÎª¶Á
+//                        I2C_Direction_Receiver);  //å°†å™¨ä»¶åœ°å€ä¼ å‡ºï¼Œä¸»æœºä¸ºè¯»
 //    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED))
-//        ;  //Çå³ıEV6
+//        ;  //æ¸…é™¤EV6
 //    while (NumByteToRead) {
-//        if (NumByteToRead == 1) {  //Ö»Ê£ÏÂ×îºóÒ»¸öÊı¾İÊ±½øÈë if Óï¾ä
-//            I2C_AcknowledgeConfig(I2C1, DISABLE);  //×îºóÓĞÒ»¸öÊı¾İÊ±¹Ø±ÕÓ¦´ğÎ»
-//            I2C_GenerateSTOP(I2C1, ENABLE);  //×îºóÒ»¸öÊı¾İÊ±Ê¹ÄÜÍ£Ö¹Î»
+//        if (NumByteToRead == 1) {  //åªå‰©ä¸‹æœ€åä¸€ä¸ªæ•°æ®æ—¶è¿›å…¥ if è¯­å¥
+//            I2C_AcknowledgeConfig(I2C1, DISABLE);  //æœ€åæœ‰ä¸€ä¸ªæ•°æ®æ—¶å…³é—­åº”ç­”ä½
+//            I2C_GenerateSTOP(I2C1, ENABLE);  //æœ€åä¸€ä¸ªæ•°æ®æ—¶ä½¿èƒ½åœæ­¢ä½
 //        }
-//        if (I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED)) {  //¶ÁÈ¡Êı¾İ
-//            *pBuffer = I2C_ReceiveData(I2C1);  //µ÷ÓÃ¿âº¯Êı½«Êı¾İÈ¡³öµ½ pBuffer
-//            pBuffer++;                         //Ö¸ÕëÒÆÎ»
-//            NumByteToRead--;                   //×Ö½ÚÊı¼õ 1
+//        if (I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_RECEIVED)) {  //è¯»å–æ•°æ®
+//            *pBuffer = I2C_ReceiveData(I2C1);  //è°ƒç”¨åº“å‡½æ•°å°†æ•°æ®å–å‡ºåˆ° pBuffer
+//            pBuffer++;                         //æŒ‡é’ˆç§»ä½
+//            NumByteToRead--;                   //å­—èŠ‚æ•°å‡ 1
 //        }
 //    }
 //    I2C_AcknowledgeConfig(I2C1, ENABLE);
@@ -637,48 +637,48 @@ void I2C3_Configuration(void) {
     GPIO_InitTypeDef GPIO_InitStructure;
     I2C_InitTypeDef I2C_InitStructure;
 
-    /*I2C2ÍâÉèÊ±ÖÓÊ¹ÄÜ */
+    /*I2C2å¤–è®¾æ—¶é’Ÿä½¿èƒ½ */
     OLED_I2C_CLK_INIT(OLED_I2C_CLK, ENABLE);
 
-    /*I2C2ÍâÉèGPIOÊ±ÖÓÊ¹ÄÜ */
+    /*I2C2å¤–è®¾GPIOæ—¶é’Ÿä½¿èƒ½ */
     RCC_AHB1PeriphClockCmd(OLED_I2C_SCL_GPIO_CLK | OLED_I2C_SDA_GPIO_CLK,
                            ENABLE);
 
-    /*!< GPIO ÅäÖÃ */
+    /*!< GPIO é…ç½® */
     GPIO_PinAFConfig(OLED_I2C_SCL_GPIO_PORT, OLED_I2C_SCL_SOURCE,
                      OLED_I2C_SCL_AF);
     GPIO_PinAFConfig(OLED_I2C_SDA_GPIO_PORT, OLED_I2C_SDA_SOURCE,
                      OLED_I2C_SDA_AF);
 
-    /*!< ÅäÖÃOLED_I2CÒı½Å: SCL */
+    /*!< é…ç½®OLED_I2Cå¼•è„š: SCL */
     
     
     GPIO_InitStructure.GPIO_Pin = OLED_I2C_SCL_PIN;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;  // I2C±ØĞë¿ªÂ©Êä³ö
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;  // I2Cå¿…é¡»å¼€æ¼è¾“å‡º
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_Init(OLED_I2C_SCL_GPIO_PORT, &GPIO_InitStructure);
 
-    /*!<ÅäÖÃOLED_I2CÒı½Å: SDA */
+    /*!<é…ç½®OLED_I2Cå¼•è„š: SDA */
     GPIO_InitStructure.GPIO_Pin = OLED_I2C_SDA_PIN;
     GPIO_Init(OLED_I2C_SDA_GPIO_PORT, &GPIO_InitStructure);
 
-    /*!< GPIO ÅäÖÃ */
+    /*!< GPIO é…ç½® */
     GPIO_SetBits(OLED_I2C_SDA_GPIO_PORT, OLED_I2C_SCL_PIN | OLED_I2C_SDA_PIN);
 
-    /* I2C ÅäÖÃ */
+    /* I2C é…ç½® */
     I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
     I2C_InitStructure.I2C_DutyCycle =
-        I2C_DutyCycle_2; /* ¸ßµçÆ½Êı¾İÎÈ¶¨£¬µÍµçÆ½Êı¾İ±ä»¯ SCL Ê±ÖÓÏßµÄÕ¼¿Õ±È */
-    I2C_InitStructure.I2C_OwnAddress1 = OLED_ADDRESS;  //Ö÷»úµÄI2CµØÖ·
+        I2C_DutyCycle_2; /* é«˜ç”µå¹³æ•°æ®ç¨³å®šï¼Œä½ç”µå¹³æ•°æ®å˜åŒ– SCL æ—¶é’Ÿçº¿çš„å ç©ºæ¯” */
+    I2C_InitStructure.I2C_OwnAddress1 = OLED_ADDRESS;  //ä¸»æœºçš„I2Cåœ°å€
     I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
     I2C_InitStructure.I2C_AcknowledgedAddress =
-        I2C_AcknowledgedAddress_7bit;             /* I2CµÄÑ°Ö·Ä£Ê½ */
-    I2C_InitStructure.I2C_ClockSpeed = I2C_Speed; /* Í¨ĞÅËÙÂÊ */
+        I2C_AcknowledgedAddress_7bit;             /* I2Cçš„å¯»å€æ¨¡å¼ */
+    I2C_InitStructure.I2C_ClockSpeed = I2C_Speed; /* é€šä¿¡é€Ÿç‡ */
 
-    I2C_Init(OLED_I2C, &I2C_InitStructure); /* I2C2 ³õÊ¼»¯ */
-    I2C_Cmd(OLED_I2C, ENABLE);              /* Ê¹ÄÜ I2C2 */
+    I2C_Init(OLED_I2C, &I2C_InitStructure); /* I2C2 åˆå§‹åŒ– */
+    I2C_Cmd(OLED_I2C, ENABLE);              /* ä½¿èƒ½ I2C2 */
 
     GPIO_PinAFConfig(OLED_I2C_SCL_GPIO_PORT, OLED_I2C_SCL_SOURCE,
                      OLED_I2C_SCL_AF);
@@ -687,9 +687,9 @@ void I2C3_Configuration(void) {
 }
 
 /**
- * @brief  ³õÊ¼»¯I2C×ÜÏß£¬Ê¹ÓÃI2CÇ°ĞèÒªµ÷ÓÃ
- * @param  ÎŞ
- * @retval ÎŞ
+ * @brief  åˆå§‹åŒ–I2Cæ€»çº¿ï¼Œä½¿ç”¨I2Cå‰éœ€è¦è°ƒç”¨
+ * @param  æ— 
+ * @retval æ— 
  */
 void I2C1_Init(void) {
     GPIO_InitTypeDef GPIO_InitStructure;

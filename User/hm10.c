@@ -4,12 +4,12 @@ void HM10_Config(void) { USART6_Config(); }
 
 void HM10_Test(void) { USARTTest(USART6); }
 
-///ÖØ¶¨Ïòc¿âº¯Êýprintfµ½´®¿Ú£¬ÖØ¶¨Ïòºó¿ÉÊ¹ÓÃprintfº¯Êý
+///é‡å®šå‘cåº“å‡½æ•°printfåˆ°ä¸²å£ï¼Œé‡å®šå‘åŽå¯ä½¿ç”¨printfå‡½æ•°
 int fputc(int ch, FILE *f) {
-    /* ·¢ËÍÒ»¸ö×Ö½ÚÊý¾Ýµ½´®¿Ú */
+    /* å‘é€ä¸€ä¸ªå­—èŠ‚æ•°æ®åˆ°ä¸²å£ */
     USART_SendData(USART6, (uint8_t)ch);
 
-    /* µÈ´ý·¢ËÍÍê±Ï */
+    /* ç­‰å¾…å‘é€å®Œæ¯• */
     while (USART_GetFlagStatus(USART6, USART_FLAG_TXE) == RESET)
         ;
 

@@ -12,8 +12,8 @@
 #define MPU6050_WHO_AM_I 0x75
 #define MPU6050_SMPLRT_DIV 0  // 8000Hz
 #define MPU6050_DLPF_CFG 0
-#define MPU6050_GYRO_OUT 0x43  // MPU6050���������ݼĴ�����ַ
-#define MPU6050_ACC_OUT 0x3B  // MPU6050���ٶ����ݼĴ�����ַ
+#define MPU6050_GYRO_OUT 0x43  // MPU6050Ã�Ã“Ã‚Ã�Ã’Ã‡ÃŠÃ½Â¾Ã�Â¼Ã„Â´Ã¦Ã†Ã·ÂµÃ˜Ã–Â·
+#define MPU6050_ACC_OUT 0x3B  // MPU6050Â¼Ã“Ã‹Ã™Â¶ÃˆÃŠÃ½Â¾Ã�Â¼Ã„Â´Ã¦Ã†Ã·ÂµÃ˜Ã–Â·
 
 #define MPU6050_ADDRESS_AD0_LOW \
     0x68  // address pin low (GND), default for InvenSense evaluation board

@@ -35,18 +35,18 @@ int main(void) {
     OLED_Config();
     OLED_Init();
 
-    OLED_Fill(0xFF);  //È«ÆÁµãÁÁ
+    OLED_Fill(0xFF);  //å…¨å±ç‚¹äº®
     Delay_s(1);       // 1s
 
-    OLED_Fill(0x00);  //È«ÆÁÃğ
+    OLED_Fill(0x00);  //å…¨å±ç­
     Delay_s(1);       // 1s
 
-    OLED_ShowStr(0, 4, (unsigned char*)"Hello Group D", 2);  //²âÊÔ8*16×Ö·û
+    OLED_ShowStr(0, 4, (unsigned char*)"Hello Group D", 2);  //æµ‹è¯•8*16å­—ç¬¦
     Delay_s(1);
-    OLED_CLS();  //ÇåÆÁ
-    OLED_OFF();  //²âÊÔOLEDĞİÃß
+    OLED_CLS();  //æ¸…å±
+    OLED_OFF();  //æµ‹è¯•OLEDä¼‘çœ 
     Delay_s(1);  // 1s
-    OLED_ON();   //²âÊÔOLEDĞİÃßºó»½ĞÑ
+    OLED_ON();   //æµ‹è¯•OLEDä¼‘çœ åå”¤é†’
 
 #endif
     
@@ -110,7 +110,7 @@ int main(void) {
             OLED_Show_3num(100 * Duty[3],100 * Duty[4], 100 * Duty[5], 4);
 #endif
             Task_Delay[0] =
-                500;  //¸üĞÂÒ»´ÎÊı¾İ£¬¿É¸ù¾İ×Ô¼ºµÄĞèÇó£¬Ìá¸ß²ÉÑùÆµÂÊ£¬Èç100ms²ÉÑùÒ»´Î
+                500;  //æ›´æ–°ä¸€æ¬¡æ•°æ®ï¼Œå¯æ ¹æ®è‡ªå·±çš„éœ€æ±‚ï¼Œæé«˜é‡‡æ ·é¢‘ç‡ï¼Œå¦‚100msé‡‡æ ·ä¸€æ¬¡
         }
 #endif
         //

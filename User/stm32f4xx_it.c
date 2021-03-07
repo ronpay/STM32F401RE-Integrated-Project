@@ -7,8 +7,8 @@
 #define ReceiverDelayReady 0
 #define NumOfReciver 6
 
-volatile uint32_t CapVal[6] = {0};      //µÚÒ»´ÎÏÂ½µÑØ¼ÆÊıÖµ
-volatile uint8_t captureFlag[6] = {0};  //²¶»ñ×´Ì¬
+volatile uint32_t CapVal[6] = {0};      //ç¬¬ä¸€æ¬¡ä¸‹é™æ²¿è®¡æ•°å€¼
+volatile uint8_t captureFlag[6] = {0};  //æ•è·çŠ¶æ€
 double Duty[6] = {0};
 int Receiver_Delay[6] = {0};
 u8 hm_flag = '2';

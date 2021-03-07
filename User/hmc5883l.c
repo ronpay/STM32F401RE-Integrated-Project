@@ -15,26 +15,26 @@ void HMC5883L_ReadData(u8 reg_add, unsigned char* Read, u8 num) {
 //   I2C_READ_BUFFER(HMC_READ, reg_add, Read, 6);
 }
 
-// GY-86³õÊ¼»¯ÅäÖÃ
+// GY-86åˆå§‹åŒ–é…ç½®
 void GY86_Init(void) {
     MPU6050_Config();
     MPU6050_Init();
     MPU6050_WriteReg(
         MPU_CFG,
-        0x02);  //½«MPUµÄCFG¼Ä´æÆ÷µÄµÚ¶þÎ»ÉèÖÃÎª1£¬ÆäËûÎ»ÔÚÊ¹ÓÃMPUÊ±ÅäÖÃ
+        0x02);  //å°†MPUçš„CFGå¯„å­˜å™¨çš„ç¬¬äºŒä½è®¾ç½®ä¸º1ï¼Œå…¶ä»–ä½åœ¨ä½¿ç”¨MPUæ—¶é…ç½®
     MPU6050_WriteReg(
         MPU_CTRL,
-        0x00);  //½«MPUµÄCTRL¼Ä´æÆ÷µÄµÚÁùÎ»ÉèÖÃÎª0£¬ÓëÉÏÃæÒ»²½¹²Í¬¿ªÆôbypassÄ£Ê½
+        0x00);  //å°†MPUçš„CTRLå¯„å­˜å™¨çš„ç¬¬å…­ä½è®¾ç½®ä¸º0ï¼Œä¸Žä¸Šé¢ä¸€æ­¥å…±åŒå¼€å¯bypassæ¨¡å¼
     Delay_ms(200);
-    HMC_Init();  // HMC³õÊ¼»¯
+    HMC_Init();  // HMCåˆå§‹åŒ–
 }
 
-// HMC³õÊ¼»¯ÅäÖÃ
+// HMCåˆå§‹åŒ–é…ç½®
 void HMC_Init(void) {
     HMC5883L_WriteReg(HMC_CONFIGA,
-                      0x50);  // 01010000/²ÉÑùÆ½¾ùÊý4£¬Êä³öËÙÂÊ15£¬Õý³£²âÁ¿ÅäÖÃ
-    HMC5883L_WriteReg(HMC_CONFIGB, 0xE0);  // 11100000/½«ÔöÒæµ÷ÖÁ×îÐ¡
-    HMC5883L_WriteReg(HMC_MODE, 0x00);     // 00000000/ÉèÖÃÎªÁ¬ÐøÄ£Ê½
+                      0x50);  // 01010000/é‡‡æ ·å¹³å‡æ•°4ï¼Œè¾“å‡ºé€ŸçŽ‡15ï¼Œæ­£å¸¸æµ‹é‡é…ç½®
+    HMC5883L_WriteReg(HMC_CONFIGB, 0xE0);  // 11100000/å°†å¢žç›Šè°ƒè‡³æœ€å°
+    HMC5883L_WriteReg(HMC_MODE, 0x00);     // 00000000/è®¾ç½®ä¸ºè¿žç»­æ¨¡å¼
 }
 
 void HMC5884LReadMe(short* MeData) {

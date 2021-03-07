@@ -6,12 +6,12 @@
 #include "stm32f4xx.h"
 #include "sysTick.h"
 // OLED
-#define OLED_ADDRESS 0x78  //Í¨¹ıµ÷Õû0Rµç×è,ÆÁ¿ÉÒÔ0x78ºÍ0x7AÁ½¸öµØÖ· -- Ä¬ÈÏ0x78
+#define OLED_ADDRESS 0x78  //é€šè¿‡è°ƒæ•´0Rç”µé˜»,å±å¯ä»¥0x78å’Œ0x7Aä¸¤ä¸ªåœ°å€ -- é»˜è®¤0x78
 
-/* STM32 I2C ¿ìËÙÄ£Ê½ */
+/* STM32 I2C å¿«é€Ÿæ¨¡å¼ */
 #define I2C_Speed 400000
 
-/*I2C½Ó¿Ú*/
+/*I2Cæ¥å£*/
 #define OLED_I2C I2C3
 #define OLED_I2C_CLK RCC_APB1Periph_I2C3
 #define OLED_I2C_CLK_INIT RCC_APB1PeriphClockCmd
@@ -32,13 +32,13 @@
 #define I2C_SPEED 400000
 #define I2C_OWN_ADDRESS 0xC0
 
-//ºÁÃë¼¶ÑÓÊ±(ĞèÒª¶¨Ê±Æ÷Ö§³Ö)£¬»òÕßÖØĞ´Delayºê
+//æ¯«ç§’çº§å»¶æ—¶(éœ€è¦å®šæ—¶å™¨æ”¯æŒ)ï¼Œæˆ–è€…é‡å†™Delayå®
 #define Delay Delay_ms
 
 #define I2Cx_FLAG_TIMEOUT ((uint32_t)900)                        // 0x1100
 #define I2Cx_LONG_TIMEOUT ((uint32_t)(300 * I2Cx_FLAG_TIMEOUT))  // was300
 
-/*Òı½Å¶¨Òå*/
+/*å¼•è„šå®šä¹‰*/
 
 #define SENSORS_I2C_SCL_GPIO_PORT GPIOB
 #define SENSORS_I2C_SCL_GPIO_CLK RCC_AHB1Periph_GPIOB
@@ -55,7 +55,7 @@
 #define SENSORS_I2C I2C1
 #define SENSORS_I2C_RCC_CLK RCC_APB1Periph_I2C1
 
-/*ĞÅÏ¢Êä³ö*/
+/*ä¿¡æ¯è¾“å‡º*/
 #define I2C_DEBUG_ON 1
 #define I2C_DEBUG_FUNC_ON 0
 
@@ -73,7 +73,7 @@
             printf("<<-I2C-FUNC->> Func:%s@Line:%d\n", __func__, __LINE__); \
     } while (0)
 
-/*º¯Êı¶¨Òå*/
+/*å‡½æ•°å®šä¹‰*/
 void I2C3_Configuration(void);
 #define I2C_Config() I2C1_Init();
 
@@ -92,7 +92,7 @@ int Sensors_I2C_WriteNoRegister(unsigned char slave_addr,
 int Sensors_I2C_ReadNoRegister(unsigned char slave_addr, unsigned short len,
                                unsigned char *data_ptr);
 
-////ÎªHMC5883L¶øÉèÖÃµÄ
+////ä¸ºHMC5883Lè€Œè®¾ç½®çš„
 //void I2C_SAND_BYTE(u8 SlaveAddr, u8 writeAddr, u8 pBuffer);
 //void I2C_READ_BUFFER(u8 SlaveAddr, u8 readAddr, u8 *pBuffer, u16 NumByteToRead);
 

@@ -3,8 +3,8 @@
  * @file    sysTick.c
  * @version V1.0
  * @date    2015-xx-xx
- * @brief   SysTick ÏµÍ³µÎ´ğÊ±ÖÓ1msÖĞ¶Ïº¯Êı¿â,ÖĞ¶ÏÊ±¼ä¿É×ÔÓÉÅäÖÃ£¬
- *          ³£ÓÃµÄÓĞ 1us 10us 1ms ÖĞ¶Ï¡£
+ * @brief   SysTick ç³»ç»Ÿæ»´ç­”æ—¶é’Ÿ1msä¸­æ–­å‡½æ•°åº“,ä¸­æ–­æ—¶é—´å¯è‡ªç”±é…ç½®ï¼Œ
+ *          å¸¸ç”¨çš„æœ‰ 1us 10us 1ms ä¸­æ–­ã€‚
  */
 
 #include "sysTick.h"
@@ -13,14 +13,14 @@ static __IO u32 TimingDelay;
 static __IO uint32_t g_ul_ms_ticks = 0;
 
 /**
- * @brief  Æô¶¯ÏµÍ³µÎ´ğ¶¨Ê±Æ÷ SysTick
- * @param  ÎŞ
- * @retval ÎŞ
+ * @brief  å¯åŠ¨ç³»ç»Ÿæ»´ç­”å®šæ—¶å™¨ SysTick
+ * @param  æ— 
+ * @retval æ— 
  */
 void SysTick_Init(void) {
-    /* SystemFrequency / 1000    1msÖĞ¶ÏÒ»´Î
-     * SystemFrequency / 100000	 10usÖĞ¶ÏÒ»´Î
-     * SystemFrequency / 1000000 1usÖĞ¶ÏÒ»´Î
+    /* SystemFrequency / 1000    1msä¸­æ–­ä¸€æ¬¡
+     * SystemFrequency / 100000	 10usä¸­æ–­ä¸€æ¬¡
+     * SystemFrequency / 1000000 1usä¸­æ–­ä¸€æ¬¡
      */
     if (SysTick_Config(SystemCoreClock / 1000)) {
         /* Capture error */
@@ -30,10 +30,10 @@ void SysTick_Init(void) {
 }
 
 /**
- * @brief   usÑÓÊ±³ÌĞò,1msÎªÒ»¸öµ¥Î»
+ * @brief   uså»¶æ—¶ç¨‹åº,1msä¸ºä¸€ä¸ªå•ä½
  * @param
- *		@arg nTime: Delay_ms( 1 ) ÔòÊµÏÖµÄÑÓÊ±Îª 1 ms
- * @retval  ÎŞ
+ *		@arg nTime: Delay_ms( 1 ) åˆ™å®ç°çš„å»¶æ—¶ä¸º 1 ms
+ * @retval  æ— 
  */
 
 void Delay_ms(__IO u32 nTime) {
@@ -44,10 +44,10 @@ void Delay_ms(__IO u32 nTime) {
 }
 
 /**
- * @brief   sÑÓÊ±³ÌĞò
+ * @brief   så»¶æ—¶ç¨‹åº
  * @param
- *		@arg ms: Delay_s( 1 ) ÔòÊµÏÖµÄÑÓÊ±Îª 1s
- * @retval  ÎŞ
+ *		@arg ms: Delay_s( 1 ) åˆ™å®ç°çš„å»¶æ—¶ä¸º 1s
+ * @retval  æ— 
  */
 void Delay_s(unsigned int ms) {
     unsigned char i;
@@ -57,10 +57,10 @@ void Delay_s(unsigned int ms) {
 }
 
 /**
- * @brief  »ñÈ¡½ÚÅÄ³ÌĞò
- * @param  ÎŞ
- * @retval ÎŞ
- * @attention  ÔÚ SysTick ÖĞ¶Ïº¯Êı SysTick_Handler()µ÷ÓÃ
+ * @brief  è·å–èŠ‚æ‹ç¨‹åº
+ * @param  æ— 
+ * @retval æ— 
+ * @attention  åœ¨ SysTick ä¸­æ–­å‡½æ•° SysTick_Handler()è°ƒç”¨
  */
 void TimingDelay_Decrement(void) {
     if (TimingDelay != 0x00) {
@@ -69,9 +69,9 @@ void TimingDelay_Decrement(void) {
 }
 
 /**
- * @brief  »ñÈ¡µ±Ç°ºÁÃëÖµ
- * @param  ´æ´¢×îĞÂºÁÃëÖµµÄ±äÁ¿
- * @retval ÎŞ
+ * @brief  è·å–å½“å‰æ¯«ç§’å€¼
+ * @param  å­˜å‚¨æœ€æ–°æ¯«ç§’å€¼çš„å˜é‡
+ * @retval æ— 
  */
 int get_tick_count(unsigned long *count) {
     count[0] = g_ul_ms_ticks;
@@ -79,9 +79,9 @@ int get_tick_count(unsigned long *count) {
 }
 
 /**
- * @brief  ºÁÃëÀÛ¼ÓÆ÷£¬ÔÚÖĞ¶ÏÀïÃ¿ºÁÃë¼Ó1
- * @param  ÎŞ
- * @retval ÎŞ
+ * @brief  æ¯«ç§’ç´¯åŠ å™¨ï¼Œåœ¨ä¸­æ–­é‡Œæ¯æ¯«ç§’åŠ 1
+ * @param  æ— 
+ * @retval æ— 
  */
 void TimeStamp_Increment(void) { g_ul_ms_ticks++; }
 /*********************************************END OF FILE**********************/
