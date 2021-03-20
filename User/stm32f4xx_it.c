@@ -38,11 +38,6 @@ void SysTick_Handler(void) {
         if (Task_Delay[i]) {
             Task_Delay[i]--;
         }
-        for (i = 0; i < NumOfReciver; i++) {
-            if (Receiver_Delay[i]) {
-                Receiver_Delay[i]--;
-            }
-        }
     }
 }
 
@@ -63,24 +58,10 @@ void TIM3_IRQHandler(void) {
                 CapVal[receiverNum] = TIM_GetCapture1(TIM3);
                 Duty[receiverNum] = (float)((int)CapVal[receiverNum] % (int)Cycle);
 
-                Motor_Set(Duty[receiverNum], receiverNum + 1);
+                //Motor_Set(Duty[receiverNum], receiverNum + 1);
                 TIM_OC1PolarityConfig(TIM3, TIM_ICPolarity_Rising);
                 captureFlag[receiverNum] = 0;
 
-                if (hm_flag == '1' &&
-                    Receiver_Delay[receiverNum] == ReceiverDelayReady) {
-                    //						printf("Cycle:%f\n",Cycle);
-                    //						printf("High:%f\n",(float)CapVal[i]);
-                    printf("CH%i:%.2f percent\n", receiverNum + 1,
-                           100 * Duty[receiverNum]);  // 5-10%
-
-                    //						printf("Cycle:%f\n",Cycle);
-                    //						printf("High:%f\n",(float)CapVal[i]);
-                    printf("CH3:%.2f percent\n",
-                           100 * (0.15f - Duty[receiverNum]));  // 5-10%
-                    //						Delay_ms(200);
-                    Receiver_Delay[receiverNum] = 500;
-                }
                 break;
         }
         TIM_ClearITPendingBit(TIM3, TIM_IT_CC1 | TIM_IT_Update);
@@ -100,7 +81,7 @@ void TIM3_IRQHandler(void) {
             case 1:
                 CapVal[receiverNum] = TIM_GetCapture2(TIM3);
                 Duty[receiverNum] = (float)((int)CapVal[receiverNum] % (int)Cycle);
-                Motor_Set(Duty[receiverNum], receiverNum + 1);
+                //Motor_Set(Duty[receiverNum], receiverNum + 1);
                 TIM_OC2PolarityConfig(TIM3, TIM_ICPolarity_Rising);
                 captureFlag[receiverNum] = 0;
 
@@ -123,7 +104,7 @@ void TIM3_IRQHandler(void) {
             case 1:
                 CapVal[receiverNum] = TIM_GetCapture3(TIM3);
                 Duty[receiverNum] = (float)((int)CapVal[receiverNum] % (int)Cycle);
-                Motor_Set(Duty[receiverNum], receiverNum + 1);
+                //Motor_Set(Duty[receiverNum], receiverNum + 1);
                 TIM_OC3PolarityConfig(TIM3, TIM_ICPolarity_Rising);
                 captureFlag[receiverNum] = 0;
 
@@ -146,7 +127,7 @@ void TIM3_IRQHandler(void) {
             case 1:
                 CapVal[receiverNum] = TIM_GetCapture4(TIM3);
                 Duty[receiverNum] = (float)((int)CapVal[receiverNum] % (int)Cycle);
-                Motor_Set(Duty[receiverNum], receiverNum + 1);
+                //Motor_Set(Duty[receiverNum], receiverNum + 1);
                 TIM_OC4PolarityConfig(TIM3, TIM_ICPolarity_Rising);
                 captureFlag[receiverNum] = 0;
         }

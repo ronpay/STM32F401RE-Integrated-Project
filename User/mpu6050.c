@@ -1,7 +1,6 @@
 #include "mpu6050.h"
 
 #include "i2c.h"
-#include "newi2c.h"
 
 #define MPU_ERROR I2C_ERROR
 #define MPU_INFO I2C_INFO
@@ -64,19 +63,19 @@ void MPU6050_Init(void) {
  * @param
  * @retval  正常返回1，异常返回0
  */
-uint8_t MPU6050ReadID(void) {
-    unsigned char Re = 0;
-    MPU6050_ReadData(MPU6050_RA_WHO_AM_I, &Re, 1);  //读器件地址
-    if (Re != 0x68) {
-        MPU_ERROR(
-            "MPU6050 dectected "
-            "error!\r\n检测不到MPU6050模块，请检查模块与开发板的接线");
-        return 0;
-    } else {
-        MPU_INFO("MPU6050 ID = %d\r\n", Re);
-        return 1;
-    }
-}
+//uint8_t MPU6050ReadID(void) {
+//    unsigned char Re = 0;
+//    MPU6050_ReadData(MPU6050_RA_WHO_AM_I, &Re, 1);  //读器件地址
+//    if (Re != 0x68) {
+//        MPU_ERROR(
+//            "MPU6050 dectected "
+//            "error!\r\n检测不到MPU6050模块，请检查模块与开发板的接线");
+//        return 0;
+//    } else {
+//        MPU_INFO("MPU6050 ID = %d\r\n", Re);
+//        return 1;
+//    }
+//}
 
 /**
  * @brief   读取MPU6050的加速度数据

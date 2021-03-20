@@ -93,7 +93,6 @@ void WriteDat(unsigned char I2C_Data)  //写数据
  */
 void OLED_Init(void) {
     Delay_ms(1000);  // 1s,这里的延时很重要,上电后延时，没有错误的冗余设计
-
     WriteCmd(0xAE);  // display off
     WriteCmd(0x20);  // Set Memory Addressing Mode
     WriteCmd(0x10);  // 00,Horizontal Addressing Mode;01,Vertical Addressing

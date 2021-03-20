@@ -5,7 +5,6 @@
 #include "i2c.h"
 #include "stm32f4xx.h"
 #include "sysTick.h"
-#include "newi2c.h"
 
 void OLED_Config(void);
 

@@ -134,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -601,62 +601,22 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USER</GroupName>
+          <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
+              <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
+              <FilePath>..\Libraries\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
             </File>
-            <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\stm32f4xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>USART.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USART.c</FilePath>
-            </File>
-            <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>mpu6050.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\mpu6050.c</FilePath>
-            </File>
-            <File>
-              <FileName>sysTick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\sysTick.c</FilePath>
-            </File>
-            <File>
-              <FileName>hmc5883l.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\hmc5883l.c</FilePath>
-            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>APP</GroupName>
+          <Files>
             <File>
               <FileName>codetab.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\codetab.c</FilePath>
-            </File>
-            <File>
-              <FileName>LED.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\LED.c</FilePath>
-            </File>
-            <File>
-              <FileName>tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\motor.c</FilePath>
             </File>
             <File>
               <FileName>hm10.c</FileName>
@@ -664,9 +624,29 @@
               <FilePath>.\hm10.c</FilePath>
             </File>
             <File>
-              <FileName>receiver.c</FileName>
+              <FileName>hmc5883l.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\receiver.c</FilePath>
+              <FilePath>.\hmc5883l.c</FilePath>
+            </File>
+            <File>
+              <FileName>LED.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LED.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\mpu6050.c</FilePath>
             </File>
             <File>
               <FileName>oled.c</FileName>
@@ -674,24 +654,39 @@
               <FilePath>.\oled.c</FilePath>
             </File>
             <File>
-              <FileName>clkConfig.c</FileName>
+              <FileName>receiver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\clkConfig.c</FilePath>
-            </File>
-            <File>
-              <FileName>newi2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\newi2c.c</FilePath>
+              <FilePath>.\receiver.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>CMSIS</GroupName>
+          <GroupName>HW</GroupName>
           <Files>
             <File>
-              <FileName>system_stm32f4xx.c</FileName>
+              <FileName>sysTick.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Libraries\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c</FilePath>
+              <FilePath>.\sysTick.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\stm32f4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>USART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USART.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -3,7 +3,7 @@
 #include "mpu6050.h"
 #include "stdio.h"
 #include "sysTick.h"
-#include "newi2c.h"
+#include "i2c.h"
 
 void HMC5883L_WriteReg(u8 reg_add, u8 reg_dat) {
 	I2C_WriteByte(I2C1,HMC_WRITE,reg_add,reg_dat);
